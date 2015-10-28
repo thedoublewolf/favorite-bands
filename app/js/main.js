@@ -192,6 +192,7 @@ exports['default'] = _backbone2['default'].Router.extend({
 		// this.showSpinner();
 		this.collection.fetch().then(function () {
 			_this.$el.html((0, _views.BandName)(_this.collection.toJSON()));
+			console.log(_this);
 		});
 	},
 
@@ -240,7 +241,7 @@ function processData(data) {
 }
 
 exports['default'] = function (data) {
-	return '\n\t\t<div class="band-name">\n\t\t\t<h1>Band</h1>\n\t\t\t<ul>' + processData(data) + '</ul>\n\t\t</div>\n\t';
+	return '\n\t\t<div class="band-name">\n\t\t\t<h1>Favorite Bands</h1>\n\t\t\t<ul>' + processData(data) + '</ul>\n\t\t</div>\n\t';
 };
 
 module.exports = exports['default'];

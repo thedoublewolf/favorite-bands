@@ -48,6 +48,7 @@ export default Backbone.Router.extend({
 					this.collection.toJSON()
 				)
 			);
+			console.log(this);
 		});
 	},
 
