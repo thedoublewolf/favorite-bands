@@ -34,6 +34,7 @@
     "watchify": "^3.4.0"
   },
   "dependencies": {
+    "backbone": "^1.2.3",
     "font-awesome": "^4.4.0",
     "jquery": "^2.1.4",
     "moment": "^2.10.6",
