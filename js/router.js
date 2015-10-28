@@ -7,8 +7,8 @@ import {
 
 import {
 	BandProfile as BandProfileView,
-	BandName as BandNameView,
-	Spinner
+	BandName as BandNameView
+	// Spinner
 } from './views';
 
 export default Backbone.Router.extend({
@@ -29,9 +29,9 @@ export default Backbone.Router.extend({
 		return this;
 	},
 
-	showSpinner() {
-		this.$el.html( Spinner() );
-	},
+	// showSpinner() {
+	// 	this.$el.html( Spinner() );
+	// },
 
 	redirectToBandName() {
 		this.navigate('bandName', {
@@ -41,7 +41,7 @@ export default Backbone.Router.extend({
 	},
 
 	showBandNames() {
-		this.showSpinner();
+		// this.showSpinner();
 		this.collection.fetch().then(() => {
 			this.$el.html(
 				BandNameView(
@@ -61,7 +61,7 @@ export default Backbone.Router.extend({
 				)
 			);
 		} else {
-			this.showSpinner();
+			// this.showSpinner();
 			band = this.collection.add({objectId: id});
 			band.fetch().then(() => {
 				this.$el.html(
