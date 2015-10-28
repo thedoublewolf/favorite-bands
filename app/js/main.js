@@ -16,7 +16,7 @@ _jquery2['default'].ajaxSetup({
 	}
 });
 
-},{"./parse_data":3,"jquery":12}],2:[function(require,module,exports){
+},{"./parse_data":3,"jquery":13}],2:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -44,7 +44,7 @@ new _router2['default']($app).start();
 
 console.log('Hello, World');
 
-},{"./ajax_setup":1,"./router":7,"jquery":12,"moment":13,"underscore":14}],3:[function(require,module,exports){
+},{"./ajax_setup":1,"./router":7,"jquery":13,"moment":14,"underscore":15}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -77,12 +77,17 @@ exports['default'] = _backbone2['default'].Model.extend({
 
 	urlRoot: _parse_data.APP_URL,
 
-	idAttribute: 'objectId'
+	idAttribute: 'objectId',
+
+	templateData: function templateData() {
+		var data = this.toJSON();
+		return data;
+	}
 
 });
 module.exports = exports['default'];
 
-},{"../parse_data":3,"backbone":11}],5:[function(require,module,exports){
+},{"../parse_data":3,"backbone":12}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -114,7 +119,7 @@ exports['default'] = _backbone2['default'].Collection.extend({
 });
 module.exports = exports['default'];
 
-},{"../parse_data":3,"./band":4,"backbone":11}],6:[function(require,module,exports){
+},{"../parse_data":3,"./band":4,"backbone":12}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -153,9 +158,7 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _resources = require('./resources');
 
-var _views = require(
-// Spinner
-'./views');
+var _views = require('./views');
 
 exports['default'] = _backbone2['default'].Router.extend({
 
@@ -166,8 +169,22 @@ exports['default'] = _backbone2['default'].Router.extend({
 	},
 
 	initialize: function initialize(appElement) {
+		var _this = this;
+
 		this.$el = appElement;
 		this.collection = new _resources.BandName();
+
+		this.$el.on('click', '.band-name-item', function (event) {
+			var $li = (0, _jquery2['default'])(event.currentTarget);
+			var bandId = $li.data('band-id');
+			_this.navigate('bandProfile/' + bandId, { trigger: true });
+		});
+
+		this.$el.on('click', '.back-button', function (event) {
+			var $button = (0, _jquery2['default'])(event.currentTarget);
+			var route = $button.data('to');
+			_this.navigate(route, { trigger: true });
+		});
 	},
 
 	start: function start() {
@@ -175,9 +192,9 @@ exports['default'] = _backbone2['default'].Router.extend({
 		return this;
 	},
 
-	// showSpinner() {
-	// 	this.$el.html( Spinner() );
-	// },
+	showSpinner: function showSpinner() {
+		this.$el.html((0, _views.Spinner)());
+	},
 
 	redirectToBandName: function redirectToBandName() {
 		this.navigate('bandName', {
@@ -187,27 +204,26 @@ exports['default'] = _backbone2['default'].Router.extend({
 	},
 
 	showBandNames: function showBandNames() {
-		var _this = this;
+		var _this2 = this;
 
-		// this.showSpinner();
+		this.showSpinner();
 		this.collection.fetch().then(function () {
-			_this.$el.html((0, _views.BandName)(_this.collection.toJSON()));
-			console.log(_this);
+			_this2.$el.html((0, _views.BandName)(_this2.collection.toJSON()));
 		});
 	},
 
 	showBandProfile: function showBandProfile(id) {
-		var _this2 = this;
+		var _this3 = this;
 
 		var band = this.collection.get(id);
 
 		if (band) {
 			this.$el.html((0, _views.BandProfile)(band.templateData()));
 		} else {
-			// this.showSpinner();
+			this.showSpinner();
 			band = this.collection.add({ objectId: id });
 			band.fetch().then(function () {
-				_this2.$el.html((0, _views.BandProfile)(band.templateData()));
+				_this3.$el.html((0, _views.BandProfile)(band.templateData()));
 			});
 		}
 	}
@@ -215,7 +231,7 @@ exports['default'] = _backbone2['default'].Router.extend({
 });
 module.exports = exports['default'];
 
-},{"./resources":6,"./views":10,"backbone":11,"jquery":12}],8:[function(require,module,exports){
+},{"./resources":6,"./views":10,"backbone":12,"jquery":13}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -223,7 +239,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = function (data) {
-	return "\n\t\t<div class=\"band\">\n\t\t\t<h1>" + data.Name + "</h1>\n\t\t\t<img src=\"" + data.imageUrl + "\">\n\t\t\t<p>" + data.favoriteAlbum + ">\n\t\t\t<p>" + data.Description + ">\n\t\t</div>\n\t";
+	return "\n\t\t<div class=\"band\">\n\t\t\t<h1>" + data.Name + "</h1>\n\t\t\t<img src=\"" + data.imageUrl + "\">\n\t\t\t<p>Favorite Album:</p>\n\t\t\t<p>" + data.favoriteAlbum + "</p>\n\t\t\t<p>Why I like them:</p>\n\t\t\t<p>" + data.Description + "</p>\n\t\t</div>\n\t";
 };
 
 module.exports = exports["default"];
@@ -263,10 +279,28 @@ var _band = require('./band');
 
 var _band2 = _interopRequireDefault(_band);
 
+var _spinner = require('./spinner');
+
+var _spinner2 = _interopRequireDefault(_spinner);
+
 exports.BandName = _favoriteBands2['default'];
 exports.BandProfile = _band2['default'];
+exports.Spinner = _spinner2['default'];
 
-},{"./band":8,"./favoriteBands":9}],11:[function(require,module,exports){
+},{"./band":8,"./favoriteBands":9,"./spinner":11}],11:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports["default"] = function () {
+  return "\n    <h1 class=\"spinner\">\n      <i class=\"fa fa-spinner fa-spin\"></i>\n    </h1>\n  ";
+};
+
+module.exports = exports["default"];
+
+},{}],12:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 
@@ -2165,7 +2199,7 @@ exports.BandProfile = _band2['default'];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"jquery":12,"underscore":14}],12:[function(require,module,exports){
+},{"jquery":13,"underscore":15}],13:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -11377,7 +11411,7 @@ return jQuery;
 
 }));
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -14573,7 +14607,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

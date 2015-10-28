@@ -7,8 +7,8 @@ import {
 
 import {
 	BandProfile as BandProfileView,
-	BandName as BandNameView
-	// Spinner
+	BandName as BandNameView,
+	Spinner
 } from './views';
 
 export default Backbone.Router.extend({
@@ -22,6 +22,18 @@ export default Backbone.Router.extend({
 	initialize(appElement) {
 		this.$el = appElement;
 		this.collection = new BandCollection();
+
+		this.$el.on('click', '.band-name-item', (event) => {
+			let $li = $(event.currentTarget);
+			let bandId = $li.data('band-id');
+			this.navigate(`bandProfile/${bandId}`, {trigger: true});
+		});
+
+		this.$el.on('click', '.back-button', (event) => {
+			let $button = $(event.currentTarget);
+			let route = $button.data('to');
+			this.navigate(route, {trigger: true});
+		});
 	},
 
 	start() {
@@ -29,9 +41,9 @@ export default Backbone.Router.extend({
 		return this;
 	},
 
-	// showSpinner() {
-	// 	this.$el.html( Spinner() );
-	// },
+	showSpinner() {
+		this.$el.html( Spinner() );
+	},
 
 	redirectToBandName() {
 		this.navigate('bandName', {
@@ -41,14 +53,13 @@ export default Backbone.Router.extend({
 	},
 
 	showBandNames() {
-		// this.showSpinner();
+		this.showSpinner();
 		this.collection.fetch().then(() => {
 			this.$el.html(
 				BandNameView(
 					this.collection.toJSON()
 				)
 			);
-			console.log(this);
 		});
 	},
 
@@ -56,20 +67,12 @@ export default Backbone.Router.extend({
 		let band = this.collection.get(id);
 
 		if (band) {
-			this.$el.html(
-				BandProfileView(
-					band.templateData()
-				)
-			);
+			this.$el.html( BandProfileView(band.templateData()) );
 		} else {
-			// this.showSpinner();
+			this.showSpinner();
 			band = this.collection.add({objectId: id});
 			band.fetch().then(() => {
-				this.$el.html(
-					BandProfileView(
-						band.templateData()
-					)
-				);
+				this.$el.html( BandProfileView( band.templateData()) );
 			});
 		}
 	}
