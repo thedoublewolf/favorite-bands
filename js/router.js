@@ -2,12 +2,14 @@ import Backbone from 'backbone';
 import $ from 'jquery';
 
 import {
-	BandName as BandCollection
+	BandName as BandCollection,
+	BandProfile as BandModel
 } from './resources';
 
 import {
 	BandProfile as BandProfileView,
 	BandName as BandNameView,
+	AddBand,
 	Spinner
 } from './views';
 
@@ -16,7 +18,8 @@ export default Backbone.Router.extend({
 	routes: {
 		''					      : 'redirectToBandName',
 		'bandName'   	    : 'showBandNames',
-		'bandProfile/:id' : 'showBandProfile'
+		'bandProfile/:id' : 'showBandProfile',
+		'addBandProfile'  : 'newBandProfile',
 	},
 
 	initialize(appElement) {
@@ -33,6 +36,32 @@ export default Backbone.Router.extend({
 			let $button = $(event.currentTarget);
 			let route = $button.data('to');
 			this.navigate(route, {trigger: true});
+		});
+
+		this.$el.on('click', '.add-button', (event) => {
+			console.log('should take me to update form');
+			let $div = $(event.currentTarget);
+			this.navigate(`addBandProfile`, {trigger: true});
+		});
+
+		this.$el.on('click', '.submit-band', (event) => {
+			let name 		 = $(this.$el).find('.name').val();
+			let image    = $(this.$el).find('.image').val();
+			let favAlbum = $(this.$el).find('.favAlbum').val();
+			let descript = $(this.$el).find('.descript').val();
+
+			let newBand = new BandModel({
+				Name: name,
+				imageUrl: image,
+				favoriteAlbum: favAlbum,
+				Description: descript
+			});
+
+			this.collection.add(newBand);
+			newBand.save().then(() => {
+				alert('New band added.  Awesome Taste!');
+				this.navigate(`bandName`, {trigger: true});
+			});
 		});
 	},
 
@@ -75,7 +104,11 @@ export default Backbone.Router.extend({
 				this.$el.html( BandProfileView( band.templateData()) );
 			});
 		}
-	}
+	},
 
+	newBandProfile() {
+		this.showSpinner();
+		this.$el.html(AddBand());
+	}
 
 });

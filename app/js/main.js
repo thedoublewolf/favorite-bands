@@ -16,7 +16,7 @@ _jquery2['default'].ajaxSetup({
 	}
 });
 
-},{"./parse_data":3,"jquery":13}],2:[function(require,module,exports){
+},{"./parse_data":3,"jquery":14}],2:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -44,7 +44,7 @@ new _router2['default']($app).start();
 
 console.log('Hello, World');
 
-},{"./ajax_setup":1,"./router":7,"jquery":13,"moment":14,"underscore":15}],3:[function(require,module,exports){
+},{"./ajax_setup":1,"./router":7,"jquery":14,"moment":15,"underscore":16}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -87,7 +87,7 @@ exports['default'] = _backbone2['default'].Model.extend({
 });
 module.exports = exports['default'];
 
-},{"../parse_data":3,"backbone":12}],5:[function(require,module,exports){
+},{"../parse_data":3,"backbone":13}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -119,7 +119,7 @@ exports['default'] = _backbone2['default'].Collection.extend({
 });
 module.exports = exports['default'];
 
-},{"../parse_data":3,"./band":4,"backbone":12}],6:[function(require,module,exports){
+},{"../parse_data":3,"./band":4,"backbone":13}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -165,7 +165,8 @@ exports['default'] = _backbone2['default'].Router.extend({
 	routes: {
 		'': 'redirectToBandName',
 		'bandName': 'showBandNames',
-		'bandProfile/:id': 'showBandProfile'
+		'bandProfile/:id': 'showBandProfile',
+		'addBandProfile': 'newBandProfile'
 	},
 
 	initialize: function initialize(appElement) {
@@ -184,6 +185,32 @@ exports['default'] = _backbone2['default'].Router.extend({
 			var $button = (0, _jquery2['default'])(event.currentTarget);
 			var route = $button.data('to');
 			_this.navigate(route, { trigger: true });
+		});
+
+		this.$el.on('click', '.add-button', function (event) {
+			console.log('should take me to update form');
+			var $div = (0, _jquery2['default'])(event.currentTarget);
+			_this.navigate('addBandProfile', { trigger: true });
+		});
+
+		this.$el.on('click', '.submit-band', function (event) {
+			var name = (0, _jquery2['default'])(_this.$el).find('.name').val();
+			var image = (0, _jquery2['default'])(_this.$el).find('.image').val();
+			var favAlbum = (0, _jquery2['default'])(_this.$el).find('.favAlbum').val();
+			var descript = (0, _jquery2['default'])(_this.$el).find('.descript').val();
+
+			var newBand = new _resources.BandProfile({
+				Name: name,
+				imageUrl: image,
+				favoriteAlbum: favAlbum,
+				Description: descript
+			});
+
+			_this.collection.add(newBand);
+			newBand.save().then(function () {
+				alert('New band added.  Awesome Taste!');
+				_this.navigate('bandName', { trigger: true });
+			});
 		});
 	},
 
@@ -226,12 +253,30 @@ exports['default'] = _backbone2['default'].Router.extend({
 				_this3.$el.html((0, _views.BandProfile)(band.templateData()));
 			});
 		}
+	},
+
+	newBandProfile: function newBandProfile() {
+		this.showSpinner();
+		this.$el.html((0, _views.AddBand)());
 	}
 
 });
 module.exports = exports['default'];
 
-},{"./resources":6,"./views":10,"backbone":12,"jquery":13}],8:[function(require,module,exports){
+},{"./resources":6,"./views":11,"backbone":13,"jquery":14}],8:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+exports["default"] = function () {
+	return "\n\t\t<div class='add-band'>\n\t\t\t<h1>Add Band</h1>\n\t\t\t<form>\n\t\t\t\t<label>Name: \t\t\t\t\t\t<input type=\"text\" class=\"name\"></label>\n\t\t\t\t<label>Image URL:       \t<input type=\"text\" class=\"image\"></label>\n\t\t\t\t<label>Favorite Album:  <input type=\"text\" class=\"favAlbum\"></label>\n\t\t\t\t<label>Why I like them: <input type=\"text\" class=\"descript\"></label>\n\t\t\t</form>\n\t\t\t<button class=\"submit-band\">Add Band</button>\n\t\t</div>\n\t";
+};
+
+module.exports = exports["default"];
+
+},{}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -239,12 +284,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = function (data) {
-	return "\n\t\t<div class=\"band\">\n\t\t\t<h1>" + data.Name + "</h1>\n\t\t\t<img src=\"" + data.imageUrl + "\">\n\t\t\t<p>Favorite Album:</p>\n\t\t\t<p>" + data.favoriteAlbum + "</p>\n\t\t\t<p>Why I like them:</p>\n\t\t\t<p>" + data.Description + "</p>\n\t\t</div>\n\t";
+	return "\n\t\t<div class=\"band\">\n\t\t\t<button class=\"back-button\" data-to=\"bandName\">\n\t\t\t\t<i class=\"fa fa-arrow-left\"></i>\n\t\t\t</button>\n\t\t\t<h1>" + data.Name + "</h1>\n\t\t\t<img src=\"" + data.imageUrl + "\">\n\t\t\t<p>Favorite Album:</p>\n\t\t\t<p>" + data.favoriteAlbum + "</p>\n\t\t\t<p>Why I like them:</p>\n\t\t\t<p>" + data.Description + "</p>\n\t\t</div>\n\t";
 };
 
 module.exports = exports["default"];
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -257,12 +302,12 @@ function processData(data) {
 }
 
 exports['default'] = function (data) {
-	return '\n\t\t<div class="band-name">\n\t\t\t<h1>Favorite Bands</h1>\n\t\t\t<ul>' + processData(data) + '</ul>\n\t\t</div>\n\t';
+	return '\n\t\t<div class="band-name">\n\t\t\t<h1>Favorite Bands</h1>\n\t\t\t<ul>' + processData(data) + '</ul>\n\t\t\t<button class="add-button">Add Band</button>\n\t\t</div>\n\t';
 };
 
 module.exports = exports['default'];
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -283,11 +328,16 @@ var _spinner = require('./spinner');
 
 var _spinner2 = _interopRequireDefault(_spinner);
 
+var _addBand = require('./addBand');
+
+var _addBand2 = _interopRequireDefault(_addBand);
+
 exports.BandName = _favoriteBands2['default'];
 exports.BandProfile = _band2['default'];
 exports.Spinner = _spinner2['default'];
+exports.AddBand = _addBand2['default'];
 
-},{"./band":8,"./favoriteBands":9,"./spinner":11}],11:[function(require,module,exports){
+},{"./addBand":8,"./band":9,"./favoriteBands":10,"./spinner":12}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -300,7 +350,7 @@ exports["default"] = function () {
 
 module.exports = exports["default"];
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 
@@ -2199,7 +2249,7 @@ module.exports = exports["default"];
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"jquery":13,"underscore":15}],13:[function(require,module,exports){
+},{"jquery":14,"underscore":16}],14:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/
@@ -11411,7 +11461,7 @@ return jQuery;
 
 }));
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -14607,7 +14657,7 @@ return jQuery;
     return _moment;
 
 }));
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

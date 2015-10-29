@@ -13,6 +13,7 @@ export default function(data) {
 		<div class="band-name">
 			<h1>Favorite Bands</h1>
 			<ul>${processData(data)}</ul>
+			<button class="add-button">Add Band</button>
 		</div>
 	`;
 }
