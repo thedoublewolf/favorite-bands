@@ -2025,6 +2025,175 @@ html {
   content: ""; }
 
 body {
-  background: #e2ebf3; }
+  background: #101012; }
+
+li {
+  list-style: none; }
+
+.container {
+  margin: 20px auto;
+  width: 700px; }
+
+.logo {
+  background: url(../favoritebandslogosmall.png);
+  width: 300px;
+  height: 60px;
+  margin-bottom: 10px; }
+
+.app {
+  border: 1px solid #282828;
+  border-radius: 5px;
+  background: #181818; }
+
+.band-name ul {
+  margin-left: 20px;
+  padding-left: 0px; }
+  .band-name ul li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border: 1px solid #282828;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width: 650px;
+    color: #A0A0A0; }
+  .band-name ul li:hover {
+    color: white;
+    background: #282828;
+    cursor: pointer;
+    border-color: #43B940; }
+
+.band-name span {
+  font-family: 'Abel', sans-serif;
+  font-size: 1.2em; }
+
+.add-button {
+  background: #131313;
+  border: 1px solid #A0A0A0;
+  border-radius: 15px;
+  padding: 5px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  width: 150px;
+  color: #A0A0A0;
+  font-family: 'Abel', sans-serif; }
+
+.add-button:hover {
+  color: white;
+  border: 1px solid #43B940; }
+
+.band .back-button {
+  background: #131313;
+  border: 1px solid #A0A0A0;
+  border-radius: 15px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100px;
+  padding: 5px;
+  font-family: 'Abel', sans-serif;
+  color: #A0A0A0; }
+
+.band .back-button:hover {
+  color: white;
+  border: 1px solid white; }
+
+.band .name {
+  color: white;
+  font-family: 'Abel', sans-serif;
+  font-weight: 300;
+  margin-left: 20px; }
+
+.band .fa {
+  color: white;
+  padding-right: 5px; }
+
+.band .fav {
+  font-family: 'Abel', sans-serif;
+  font-size: 1em;
+  color: #43B940;
+  margin-left: 20px;
+  margin-bottom: 0px; }
+
+.band .favname {
+  font-family: 'Abel', sans-serif;
+  font-style: italic;
+  font-size: 1.2em;
+  color: #A0A0A0;
+  margin-left: 30px;
+  margin-top: 5px; }
+
+.band .why {
+  font-family: 'Abel', sans-serif;
+  font-size: 1em;
+  color: #43B940;
+  margin-left: 20px;
+  margin-bottom: 0px; }
+
+.band .desc {
+  font-family: 'Abel', sans-serif;
+  font-size: 1.2em;
+  color: #A0A0A0;
+  margin-left: 30px;
+  margin-top: 5px;
+  width: 600px; }
+
+.band img {
+  max-width: 600px;
+  margin-left: 20px; }
+
+.add-band .addheader {
+  color: white;
+  font-family: 'Abel', sans-serif;
+  font-weight: 300;
+  margin-left: 20px; }
+
+.add-band label {
+  color: #A0A0A0;
+  font-family: 'Abel', sans-serif;
+  font-size: 1em;
+  margin-left: 20px;
+  margin-bottom: 0px; }
+  .add-band label input {
+    display: block;
+    background: #131313;
+    border: 1px solid #A0A0A0;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 300px;
+    color: #A0A0A0;
+    font-family: 'Abel', sans-serif; }
+  .add-band label .descript {
+    display: block;
+    display: block;
+    background: #131313;
+    border: 1px solid #A0A0A0;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 300px;
+    height: 200px;
+    color: #A0A0A0;
+    font-family: 'Abel', sans-serif; }
+
+.add-band .submit-band {
+  background: #131313;
+  border: 1px solid #A0A0A0;
+  border-radius: 15px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100px;
+  padding: 5px;
+  font-family: 'Abel', sans-serif;
+  color: #A0A0A0; }
+
+.add-band .submit-band:hover {
+  color: white;
+  border: 1px solid white; }
 
 /*# sourceMappingURL=main.css.map */

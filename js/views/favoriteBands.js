@@ -11,9 +11,8 @@ function processData(data) {
 export default function(data) {
 	return `
 		<div class="band-name">
-			<h1>Favorite Bands</h1>
 			<ul>${processData(data)}</ul>
-			<button class="add-button">Add Band</button>
 		</div>
+		<button class="add-button"><i class="fa fa-plus"></i> New Band</button>
 	`;
 }

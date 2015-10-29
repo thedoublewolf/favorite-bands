@@ -271,7 +271,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = function () {
-	return "\n\t\t<div class='add-band'>\n\t\t\t<h1>Add Band</h1>\n\t\t\t<form>\n\t\t\t\t<label>Name: \t\t\t\t\t\t<input type=\"text\" class=\"name\"></label>\n\t\t\t\t<label>Image URL:       \t<input type=\"text\" class=\"image\"></label>\n\t\t\t\t<label>Favorite Album:  <input type=\"text\" class=\"favAlbum\"></label>\n\t\t\t\t<label>Why I like them: <input type=\"text\" class=\"descript\"></label>\n\t\t\t</form>\n\t\t\t<button class=\"submit-band\">Add Band</button>\n\t\t</div>\n\t";
+	return "\n\t\t<div class='add-band'>\n\t\t\t<h1 class=\"addheader\">Add Band</h1>\n\t\t\t<form>\n\t\t\t\t<label>Name: \t\t\t\t\t\t<input type=\"text\" class=\"name\"></label>\n\t\t\t\t<label>Image URL:       \t<input type=\"text\" class=\"image\"></label>\n\t\t\t\t<label>Favorite Album:  <input type=\"text\" class=\"favAlbum\"></label>\n\t\t\t\t<label>Why I like them: <textarea class=\"descript\"></textarea></label>\n\t\t\t</form>\n\t\t\t<button class=\"submit-band\">Add Band</button>\n\t\t</div>\n\t";
 };
 
 module.exports = exports["default"];
@@ -284,7 +284,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports["default"] = function (data) {
-	return "\n\t\t<div class=\"band\">\n\t\t\t<button class=\"back-button\" data-to=\"bandName\">\n\t\t\t\t<i class=\"fa fa-arrow-left\"></i>\n\t\t\t</button>\n\t\t\t<h1>" + data.Name + "</h1>\n\t\t\t<img src=\"" + data.imageUrl + "\">\n\t\t\t<p>Favorite Album:</p>\n\t\t\t<p>" + data.favoriteAlbum + "</p>\n\t\t\t<p>Why I like them:</p>\n\t\t\t<p>" + data.Description + "</p>\n\t\t</div>\n\t";
+	return "\n\t\t<div class=\"band\">\n\t\t\t<h1 class=\"name\">" + data.Name + "</h1>\n\t\t\t<img src=\"" + data.imageUrl + "\">\n\t\t\t<p class=\"fav\">Favorite Album:</p>\n\t\t\t<p class=\"favname\"><i class=\"fa fa-music\"></i> " + data.favoriteAlbum + "</p>\n\t\t\t<p class=\"why\">Why I like them:</p>\n\t\t\t<p class=\"desc\"><i class=\"fa fa-quote-right\"></i> " + data.Description + "</p>\n\t\t\t<button class=\"back-button\" data-to=\"bandName\">\n\t\t\t\t<i class=\"fa fa-arrow-left\"></i>\n\t\t\t</button>\n\t\t</div>\n\t";
 };
 
 module.exports = exports["default"];
@@ -302,7 +302,7 @@ function processData(data) {
 }
 
 exports['default'] = function (data) {
-	return '\n\t\t<div class="band-name">\n\t\t\t<h1>Favorite Bands</h1>\n\t\t\t<ul>' + processData(data) + '</ul>\n\t\t\t<button class="add-button">Add Band</button>\n\t\t</div>\n\t';
+	return '\n\t\t<div class="band-name">\n\t\t\t<ul>' + processData(data) + '</ul>\n\t\t</div>\n\t\t<button class="add-button"><i class="fa fa-plus"></i> New Band</button>\n\t';
 };
 
 module.exports = exports['default'];

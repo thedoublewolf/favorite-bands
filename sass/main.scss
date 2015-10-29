@@ -3,5 +3,215 @@
 @import "font-awesome";
 
 body {
-  background: #e2ebf3;
+  background: #101012;
 }
+
+li {
+	list-style: none;
+}
+
+.container {
+	margin: 20px auto;
+	width: 700px;
+}
+
+.logo {
+	background: url(../favoritebandslogosmall.png);
+	width: 300px;
+	height: 60px;
+	margin-bottom: 10px;
+}
+
+.app {
+	border: 1px solid #282828;
+	border-radius: 5px;
+	background: #181818;
+}
+
+.band-name { 
+	ul {
+		margin-left: 20px;
+		padding-left: 0px;
+		li {
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-left: 10px;
+			border: 1px solid #282828;
+			border-top: none;
+			border-left: none;
+			border-right: none;
+			width: 650px;
+			color: #A0A0A0;
+		}
+		li:hover {
+			color: white;
+			background: #282828;
+			cursor: pointer;
+			border-color: #43B940;
+		}
+	}
+	span {
+		font-family: 'Abel', sans-serif;
+		font-size: 1.2em;
+	}
+}
+.add-button {
+	background: #131313;
+	border: 1px solid #A0A0A0;
+	border-radius: 15px;
+	padding: 5px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	width: 150px;
+	color: #A0A0A0;
+	font-family: 'Abel', sans-serif;
+}
+.add-button:hover {
+	color: white;
+	border: 1px solid #43B940;
+}
+
+.band {
+	.back-button {
+		background: #131313;
+		border: 1px solid #A0A0A0;
+		border-radius: 15px;
+		margin-left: 20px;
+		margin-bottom: 20px;
+		text-align: center;
+		width: 100px;
+		padding: 5px;
+		font-family: 'Abel', sans-serif;
+		color: #A0A0A0;
+	}
+	.back-button:hover {
+		color: white;
+		border: 1px solid white;
+	}
+	.name {
+		color: white;
+		font-family: 'Abel', sans-serif;
+		font-weight: 300;
+		margin-left: 20px;
+	}
+	.fa {
+		color: white;
+		padding-right: 5px;
+	}
+	.fav {
+		font-family: 'Abel', sans-serif;
+		font-size: 1em;
+		color: #43B940;
+		margin-left: 20px;
+		margin-bottom: 0px;
+	}
+	.favname {
+		font-family: 'Abel', sans-serif;
+		font-style: italic;
+		font-size: 1.2em;
+		color: #A0A0A0;
+		margin-left: 30px;
+		margin-top: 5px;
+	}
+	.why {
+		font-family: 'Abel', sans-serif;
+		font-size: 1em;
+		color: #43B940;
+		margin-left: 20px;
+		margin-bottom: 0px;
+	}
+	.desc {
+		font-family: 'Abel', sans-serif;
+		font-size: 1.2em;
+		color: #A0A0A0;
+		margin-left: 30px;
+		margin-top: 5px;
+		width: 600px;
+	}
+	img {
+		max-width: 600px;
+		margin-left: 20px;
+	}
+}
+.add-band {
+	.addheader {
+		color: white;
+		font-family: 'Abel', sans-serif;
+		font-weight: 300;
+		margin-left: 20px;
+	}
+	label {
+		color: #A0A0A0;
+		font-family: 'Abel', sans-serif;
+		font-size: 1em;
+		margin-left: 20px;
+		margin-bottom: 0px;
+		input {
+			display: block;
+			background: #131313;
+			border: 1px solid #A0A0A0;
+			border-radius: 5px;
+			padding: 5px;
+			margin-left: 20px;
+			margin-bottom: 20px;
+			width: 300px;
+			color: #A0A0A0;
+			font-family: 'Abel', sans-serif;
+		}
+		.descript {
+			display: block;
+			display: block;
+			background: #131313;
+			border: 1px solid #A0A0A0;
+			border-radius: 5px;
+			padding: 5px;
+			margin-left: 20px;
+			margin-bottom: 20px;
+			width: 300px;
+			height: 200px;
+			color: #A0A0A0;
+			font-family: 'Abel', sans-serif;
+		}
+	}
+	.submit-band {
+		background: #131313;
+		border: 1px solid #A0A0A0;
+		border-radius: 15px;
+		margin-left: 20px;
+		margin-bottom: 20px;
+		text-align: center;
+		width: 100px;
+		padding: 5px;
+		font-family: 'Abel', sans-serif;
+		color: #A0A0A0;
+	}
+	.submit-band:hover {
+		color: white;
+		border: 1px solid white;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

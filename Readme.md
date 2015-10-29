@@ -1,6 +1,12 @@
-## Welcome to My Project
+## Favorite Bands
 
-> I am your Readme.md file, you should probably update me.
+> A list of my favorite bands.
+
+> Utilizes Bacbone Models, Collections, and Routers.
+
+> Uses BaaS to pull both an array of data as well as a single object.
+
+> Also uses BaaS to push data and create a new resource.
 
 
 ## Usage
